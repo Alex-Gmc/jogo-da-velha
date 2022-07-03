@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da velha</title>
+    <style>
+        body{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            color: #fff;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        p{
+            font-size: large;
+            margin-bottom: 50px;
+        }
+        .tabuleiro{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 3px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+        .bloco{
+            width: 50px;
+            height: 50px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        button{
+            margin-top: 30px;
+            border: 0;
+            height: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo da velha</h1>
+
+    <div class="instru">
+        <p class="jogador">Jogador 1</p>
+    </div>
+
+    <div class="tabuleiro">
+        <div class="bloco 1" ></div>
+        <div class="bloco 2" ></div>
+        <div class="bloco 3" ></div>
+        <div class="bloco 4" ></div>
+        <div class="bloco 5" ></div>
+        <div class="bloco 6" ></div>
+        <div class="bloco 7" ></div>
+        <div class="bloco 8" ></div>
+        <div class="bloco 9" ></div>
+    </div>
+
+    <p class="winnerBanner"></p>
+
+    <button ><a style="color: #000;" href="./index.html">Zerar</a></button>
+    
+<script>
+
+    let bloco = document.querySelectorAll('.bloco')
+    let playerStatus = document.querySelector('.jogador')
+    let winnerBanner = document.querySelector('.winnerBanner')
+    let xo
+    let array1 = []
+    let array2 = []
+
+    for(let i = 0;bloco.length>i;i++){
+        bloco[i].addEventListener('click',(e)=>{jogar(e)})
+    }
+   
+
+   function inserir(e){
+
+    if(playerStatus.textContent=='Jogador 1'){
+        playerStatus.textContent = 'Jogador 2'
+        xo = 'X'
+    }else{
+        playerStatus.textContent = 'Jogador 1'
+        xo = 'O'
+    }
+   }
+
+   function winner(e){
+
+            let win = n => winnerBanner.textContent = `Jogador ${n} venceu 😁`;
+       
+        if(playerStatus.textContent=='Jogador 1'){
+
+            array1.push(parseInt(e.target.className[6]))
+            array1.sort((a,b)=>{return a-b})
+
+            if(array1.indexOf(1)!=-1 && array1.indexOf(2)!=-1 && array1.indexOf(3)!=-1 ){win(1)}
+
+            if(array1.indexOf(4)!=-1 && array1.indexOf(5)!=-1 && array1.indexOf(6)!=-1 ){win(1)}
+
+            if(array1.indexOf(7)!=-1 && array1.indexOf(8)!=-1 && array1.indexOf(9)!=-1 ){win(1)}
+
+            if(array1.indexOf(1)!=-1 && array1.indexOf(4)!=-1 && array1.indexOf(7)!=-1 ){win(1)}
+
+            if(array1.indexOf(2)!=-1 && array1.indexOf(5)!=-1 && array1.indexOf(8)!=-1 ){win(1)}
+
+            if(array1.indexOf(3)!=-1 && array1.indexOf(6)!=-1 && array1.indexOf(9)!=-1 ){win(1)}//
+
+            if(array1.indexOf(1)!=-1 && array1.indexOf(5)!=-1 && array1.indexOf(9)!=-1 ){win(1)}
+
+            if(array1.indexOf(3)!=-1 && array1.indexOf(5)!=-1 && array1.indexOf(7)!=-1 ){win(1)}
+
+        }
+
+        if(playerStatus.textContent=='Jogador 2'){
+
+            array2.push(parseInt(e.target.className[6]))
+            array2.sort((a,b)=>{return a-b})
+
+            if(array2.indexOf(1)!=-1 && array2.indexOf(2)!=-1 && array2.indexOf(3)!=-1 ){win(2)}
+
+            if(array2.indexOf(4)!=-1 && array2.indexOf(5)!=-1 && array2.indexOf(6)!=-1 ){win(2)}
+
+            if(array2.indexOf(7)!=-1 && array2.indexOf(8)!=-1 && array2.indexOf(9)!=-1 ){win(2)}
+
+            if(array2.indexOf(1)!=-1 && array2.indexOf(4)!=-1 && array2.indexOf(7)!=-1 ){win(2)}
+
+            if(array2.indexOf(2)!=-1 && array2.indexOf(5)!=-1 && array2.indexOf(8)!=-1 ){win(2)}
+
+            if(array2.indexOf(3)!=-1 && array2.indexOf(6)!=-1 && array2.indexOf(9)!=-1 ){win(2)}//
+
+            if(array2.indexOf(1)!=-1 && array2.indexOf(5)!=-1 && array2.indexOf(9)!=-1 ){win(2)}
+
+            if(array2.indexOf(3)!=-1 && array2.indexOf(5)!=-1 && array2.indexOf(7)!=-1 ){win(2)}
+
+            console.log(array2)
+
+        }
+   }
+
+   function jogar(e){
+       winner(e)
+       inserir()
+       e.target.textContent = xo
+
+   }
+    
+</script>
+
+</body>
+</html>
